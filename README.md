@@ -6,3 +6,5 @@ will purchase in the foreseeable future.
 
 Demand forecasting is a field of predictive analytics which tries to understand and predict customer demand to optimize supply
 decisions by corporate supply chain and business management.
+
+#My 1st Github Project#
