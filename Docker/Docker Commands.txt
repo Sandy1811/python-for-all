@@ -1,0 +1,46 @@
+docker ps
+
+docker version
+
+docker run hello-world (image)
+
+docker run busybox echo msg(hi pepu)
+
+docker run busybox ls (list all the file folder in the image)
+
+
+## Listing Running Containers ##
+docker ps (list all active containers)
+
+Ctrl + C - to stop the currently running commands in docker
+
+docker ps --all (list all the containers which were ever statred on our machine)
+
+## Container Lifecycle ##
+docker create hello-world
+
+(It will generate container ID) 
+eg -- c750bf9c6b31bf1c551c4757727020cf56de19a3723a7635aab8aa7a9e819dd0
+
+docker start -a (Copy the ID generated from above) --It will watch for output from the container and printed out to your terminal
+
+## Restarted stopped containers ##
+docker ps --all
+
+-- Copy any stopped container id and then run command
+docker start -a (paste the ID here)
+
+## Removing Stopped Containers ##
+docker system prune
+
+## Retrieving log outputs ##
+docker create busybox echo hi sandy
+
+docker start ID
+
+docker logs (ID)
+
+
+
+
+
