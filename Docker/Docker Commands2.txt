@@ -1,0 +1,127 @@
+1) Orientation
+
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Execute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+
+2) Containers
+docker run hello-world
+Dockerfile
+requirements.txt
+app.py
+
+#Build the app
+ls
+docker build --tag=friendlyhello .
+docker image ls
+
+#Run the App
+docker run -p 4000:80 friendlyhello
+#http://0.0.0.0:80 - Internal URL
+#http://localhost:4000 - External URL
+#http://192.168.99.100:4000/ --  Our app will run on this URL
+
+#Running the app in the background
+docker run -d -p 4000:80 friendlyhello
+
+docker container ls
+# Stopping the running image by ctrl+C and the below command:
+docker container stop 1fa4ab2cf395
+
+#Share your image
+
+##Log in with your Docker ID##
+docker login
+
+##Tag the image##
+docker tag friendlyhello sandy1811/docker-test:part2
+
+##Publish the image##
+docker push sandy1811/docker-test:part2
+
+##Pull and run the image from the remote repository##
+docker run -p 4000:80 sandy1811/docker-test:part2
+
+
+3) Services
+#Your first docker-compose.yml file
+#Run your new load-balanced app
+docker swarm init --advertise-addr 192.168.99.100
+
+((To add a worker to this swarm, run the following command:
+
+docker swarm join --token SWMTKN-1-0hi1lgax4lgzaan5cc1tnjehemnrl5q0xspf52a7dcenwvaflp-4g66vqoqhv
+bfvw7ck87r8bien 192.168.99.100:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.))
+
+##
+docker stack deploy -c docker-compose.yml getstartedlab
+docker service ls
+docker stack services getstartedlab
+
+
+4) Swarm
+#Set up your swarm
+#Create a cluster
+
+docker-machine create --driver virtualbox myvm1
+docker-machine create --driver virtualbox myvm2
+
+#List the VMs and get their IP addresses
+docker-machine ls
+
+#Initialize the swarm and add nodes
+docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101:2376"
+
+docker-machine ssh myvm2 docker swarm join --token SWMTKN-1-5gbkqcey1mwesxcomn9uj6jo7hcu4zx245tr9jr67wuukcdxdi-4yix28eijv
+u0sjbhveyoypymo 192.168.99.101:2376
+
+docker-machine ssh myvm2 "
+
+docker-machine ssh myvm1 "docker node ls"
+
+##Docker machine shell environment on Windows
+docker-machine env myvm1
+
+# To activate myvm1
+eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env myvm1) 
+
+#Deploy the app on the swarm manager
+docker stack deploy -c docker-compose.yml getstartedlab
+
+
+
+5) Stacks
+#Update Docker-compose.yml file with the latest one
+
+docker-machine ls - check that * mark is on myvm1
+
+docker stack deploy -c docker-compose.yml getstartedlab
+
+#Let’s go through the same workflow once more to add a Redis database for storing app data.
+
+# Update Latest YML file
+
+#Create a ./data directory on the manager:
+docker-machine ssh myvm1 "mkdir ./data"
+
+docker stack deploy -c docker-compose.yml getstartedlab
+

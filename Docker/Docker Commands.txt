@@ -1,3 +1,5 @@
+Docker Root Dir: /mnt/sda1/var/lib/docker
+
 docker ps
 
 docker version
@@ -39,6 +41,32 @@ docker create busybox echo hi sandy
 docker start ID
 
 docker logs (ID)
+
+## Stopping Containers ##
+docker ps
+
+docker start (ID) 
+
+docker stop (ID) - wait for 10 Sec to stop the container
+
+docker kill (ID)
+
+## Multicommand Containers ##
+# Executing command in running containers #
+
+
+
+### Building Custom Images through Docker ###
+
+## Creating Docker Images ##
+
+## Building a Docker file ##
+first Create a folder/Directiory using -- mkdir (Foldername)
+cd (Copy Path)
+
+
+
+
 
 
 
